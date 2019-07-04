@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TestMovieDatabase</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="action_popular_movies">Most popular</string>
+    <string name="action_upcoming_movies">Upcoming</string>
+    <string name="action_top_rated_movies">Top Rated</string>
+</resources>
