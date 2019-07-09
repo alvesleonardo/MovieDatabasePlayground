@@ -1,11 +1,11 @@
-package com.leonardoalves.testmoviedatabase.data
+package com.leonardoalves.services_base.models
 
 import com.google.gson.annotations.SerializedName
 
-data class MovieList(
+data class MovieListResponse(
 
 	@field:SerializedName("comments")
-	val comments: Comments? = null,
+	val comments: CommentsResponse? = null,
 
 	@field:SerializedName("iso_3166_1")
 	val iso31661: String? = null,
@@ -26,7 +26,7 @@ data class MovieList(
 	val iso6391: String? = null,
 
 	@field:SerializedName("created_by")
-	val createdBy: CreatedBy? = null,
+	val createdBy: CreatedByResponse? = null,
 
 	@field:SerializedName("poster_path")
 	val posterPath: String? = null,
@@ -53,5 +53,5 @@ data class MovieList(
 	val page: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<Movie?>? = null
+	val results: List<MovieResponse>? = null
 )

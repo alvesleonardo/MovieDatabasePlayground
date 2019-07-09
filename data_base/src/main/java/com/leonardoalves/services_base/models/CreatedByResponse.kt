@@ -1,8 +1,8 @@
-package com.leonardoalves.testmoviedatabase.data
+package com.leonardoalves.services_base.models
 
 import com.google.gson.annotations.SerializedName
 
-data class CreatedBy(
+data class CreatedByResponse(
 
 	@field:SerializedName("gravatar_hash")
 	val gravatarHash: String? = null,

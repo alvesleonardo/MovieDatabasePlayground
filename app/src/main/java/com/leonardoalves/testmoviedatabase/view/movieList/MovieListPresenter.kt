@@ -70,6 +70,7 @@ class MovieListPresenter(
         completed = false
         compositeDisposable.clear()
         isLoading = false
+        view.setItems(listOf(), true)
         getItems()
     }
 

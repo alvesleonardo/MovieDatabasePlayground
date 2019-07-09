@@ -1,8 +1,8 @@
-package com.leonardoalves.testmoviedatabase.data
+package com.leonardoalves.services_base.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+data class MovieResponse(
 
     @field:SerializedName("overview")
 	val overview: String? = null,
