@@ -9,7 +9,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leonardoalves.testmoviedatabase.R
-import com.leonardoalves.testmoviedatabase.view.custom.*
+import com.leonardoalves.feature_common.custom.*
 import com.leonardoalves.testmoviedatabase.view.movieDetail.MovieDetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject

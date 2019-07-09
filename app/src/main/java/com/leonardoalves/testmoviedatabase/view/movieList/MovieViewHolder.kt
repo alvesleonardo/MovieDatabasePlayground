@@ -3,8 +3,7 @@ package com.leonardoalves.testmoviedatabase.view.movieList
 import android.view.View
 import com.bumptech.glide.Glide
 import com.leonardoalves.testmoviedatabase.R
-import com.leonardoalves.testmoviedatabase.view.custom.ViewHolder
-import kotlinx.android.synthetic.main.list_item_movie.view.*
+import com.leonardoalves.feature_common.custom.ViewHolder
 
 const val MOVIE_LIST_LAYOUT_ID = R.layout.list_item_movie
 

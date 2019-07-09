@@ -1,6 +1,6 @@
 package com.leonardoalves.services_base
 
-import com.leonardoalves.domain.MovieShowRoom
+import com.leonardoalves.domain.showroom.MovieShowRoom
 import com.leonardoalves.services_base.MovieShowRoomMapper.IMAGE_URL
 import com.leonardoalves.services_base.models.MovieListResponse
 import com.leonardoalves.services_base.models.MovieResponse

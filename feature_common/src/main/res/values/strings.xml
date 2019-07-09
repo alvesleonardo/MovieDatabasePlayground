@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">feature_common</string>
+    <string name="dialog_ok">Ok</string>
+</resources>

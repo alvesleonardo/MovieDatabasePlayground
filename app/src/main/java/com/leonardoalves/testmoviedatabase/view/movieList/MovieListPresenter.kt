@@ -1,6 +1,5 @@
 package com.leonardoalves.testmoviedatabase.view.movieList
 
-import com.leonardoalves.testmoviedatabase.module.IMAGE_URL
 import com.leonardoalves.testmoviedatabase.repository.repository.MovieRepository
 import io.reactivex.disposables.CompositeDisposable
 import java.io.Serializable
@@ -30,34 +29,34 @@ class MovieListPresenter(
     }
 
     private fun getItems() {
-        compositeDisposable.add(
-            observable
-                .doOnSubscribe {
-                    isLoading = true
-                    view.startLoading()
-                }
-                .doOnComplete {
-                    isLoading = false
-                    view.stopLoading()
-                }
-                .map { list ->
-                    list.map { movie ->
-                        MovieViewModel(
-                            movie.id,
-                            IMAGE_URL + movie.posterPath,
-                            movie.title ?: "",
-                            movie.overview ?: ""
-                        )
-                    }
-                }
-                .subscribe({
-                    view.setItems(it, page == 1)
-                    page++
-                }, {
-                    it.printStackTrace()
-                    completed = true
-                }, {})
-        )
+//        compositeDisposable.add(
+//            observable
+//                .doOnSubscribe {
+//                    isLoading = true
+//                    view.startLoading()
+//                }
+//                .doOnComplete {
+//                    isLoading = false
+//                    view.stopLoading()
+//                }
+//                .map { list ->
+//                    list.map { movie ->
+//                        MovieViewModel(
+//                            movie.id,
+//                            com.leonardoalves.data.IMAGE_URL + movie.posterPath,
+//                            movie.title ?: "",
+//                            movie.overview ?: ""
+//                        )
+//                    }
+//                }
+//                .subscribe({
+//                    view.setItems(it, page == 1)
+//                    page++
+//                }, {
+//                    it.printStackTrace()
+//                    completed = true
+//                }, {})
+//        )
     }
 
     fun changeListType(newType: Type) {

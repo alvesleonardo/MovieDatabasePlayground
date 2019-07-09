@@ -1,6 +1,6 @@
 package com.leonardoalves.testmoviedatabase.view.movieList
 
-import com.leonardoalves.testmoviedatabase.view.custom.ViewModel
+import com.leonardoalves.feature_common.custom.ViewModel
 
 class MovieViewModel(
     val id: Long,

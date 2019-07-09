@@ -1,1 +1,1 @@
-include ':app', ':data_base', ':data', ':domain'
+include ':app', ':data_base', ':data', ':domain', ':feature_movie_list', ':feature_common'

@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
       <module fileurl="file://$PROJECT_DIR$/data_base/data_base.iml" filepath="$PROJECT_DIR$/data_base/data_base.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feature_common/feature_common.iml" filepath="$PROJECT_DIR$/feature_common/feature_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/feature_movie_list/feature_movie_list.iml" filepath="$PROJECT_DIR$/feature_movie_list/feature_movie_list.iml" />
     </modules>
   </component>
 </project>

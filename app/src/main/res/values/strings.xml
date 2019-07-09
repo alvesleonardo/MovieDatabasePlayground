@@ -4,4 +4,5 @@
     <string name="action_popular_movies">Most popular</string>
     <string name="action_upcoming_movies">Upcoming</string>
     <string name="action_top_rated_movies">Top Rated</string>
+    <string name="title_feature_movie_list">Movie List</string>
 </resources>
