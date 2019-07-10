@@ -13,16 +13,20 @@ const val API_KEY = "7bceb0b1f7044212ad30ef524c01b8d4"
 
 interface MovieDatabaseApi {
 
-    @GET("list/")
-    fun getList(@Query("page") page: Int, @Query("api_key") apikey: String = API_KEY): Observable<MovieListResponse>
-
-    @GET("discover/movie?sort_by=popularity.desc")
-    fun getPopular(@Query("page") page: Int, @Query("api_key") apikey: String = API_KEY): Observable<MovieListResponse>
+    @GET("discover/movie") //At least 5k votes to be significant
+    fun getPopular(
+        @Query("page") page: Int, @Query("api_key") apikey: String = API_KEY, @Query("sort_by") sortBy: String = "popularity.desc", @Query(
+            "vote_count.gte"
+        ) moreThanVotes: Int = 5000
+    ): Observable<MovieListResponse>
 
     @GET("discover/movie")
-    fun getUpcoming(@Query("page") page: Int,
-                    @SuppressLint("SimpleDateFormat") @Query("primary_release_date.gte") after: String = SimpleDateFormat("yyyy-MM-dd").format(Date()),
-                    @Query("api_key") apikey: String = API_KEY
+    fun getUpcoming(
+        @Query("page") page: Int,
+        @SuppressLint("SimpleDateFormat") @Query("primary_release_date.gte") after: String = SimpleDateFormat("yyyy-MM-dd").format(
+            Date()
+        ),
+        @Query("api_key") apikey: String = API_KEY
     ): Observable<MovieListResponse>
 
     @GET("discover/movie?sort_by=vote_average.desc")

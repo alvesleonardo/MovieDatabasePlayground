@@ -9,6 +9,7 @@ class MovieDataBaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         startDependencies()
+
     }
 
     private fun startDependencies(){

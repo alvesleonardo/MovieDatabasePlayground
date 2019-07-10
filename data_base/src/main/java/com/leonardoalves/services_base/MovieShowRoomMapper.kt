@@ -9,9 +9,10 @@ object MovieShowRoomMapper {
 
     operator fun invoke(response: MovieListResponse) = with(response){
         this.results.orEmpty().map {
+            val imageUrl = if (it.posterPath.isNullOrBlank()){ "https://europeixe.ch/wp-content/uploads/2019/05/no_image.png"} else {IMAGE_URL + it.posterPath}
             MovieShowRoom(
                 it.id,
-                IMAGE_URL + it.posterPath,
+                imageUrl,
                 it.title ?: "",
                 it.originalTitle ?: "",
                 it.overview ?: ""
