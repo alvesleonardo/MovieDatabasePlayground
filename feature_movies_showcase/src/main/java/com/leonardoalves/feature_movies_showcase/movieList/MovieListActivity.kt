@@ -75,7 +75,7 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_popular_movies or R.id.action_upcoming_movies or R.id.action_top_rated_movies -> {
+            R.id.action_popular_movies, R.id.action_upcoming_movies, R.id.action_top_rated_movies -> {
                 presenter.changeListType(item.itemId)
                 true
             }

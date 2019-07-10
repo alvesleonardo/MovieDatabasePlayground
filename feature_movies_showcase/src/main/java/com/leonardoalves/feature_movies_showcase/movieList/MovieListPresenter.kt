@@ -7,7 +7,7 @@ import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewModel
 import io.reactivex.disposables.CompositeDisposable
 
 class MovieListPresenter(
-    movieShowroomIterator: MovieShowroomIterator,
+    private val movieShowroomIterator: MovieShowroomIterator,
     private val view: MovieListView
 ) {
     private val compositeDisposable = CompositeDisposable()
@@ -18,15 +18,13 @@ class MovieListPresenter(
     private var completed = false
     private var isLoading = false
 
-    private val observable = movieShowroomIterator.getList(page, type)
-
     fun onCreate() {
         getItems()
     }
 
     private fun getItems() {
         compositeDisposable.add(
-            observable
+            movieShowroomIterator.getList(page, type)
                 .doOnSubscribe {
                     isLoading = true
                     view.startLoading()
