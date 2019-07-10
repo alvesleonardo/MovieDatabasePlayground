@@ -11,10 +11,10 @@ class MovieDataBaseApp : Application() {
         startDependencies()
     }
 
-    fun startDependencies(){
+    private fun startDependencies(){
         startKoin {
             androidContext(this@MovieDataBaseApp)
+            Modules.init()
         }
-        Modules.init()
     }
 }

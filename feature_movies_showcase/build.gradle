@@ -31,6 +31,7 @@ dependencies {
 
     implementation project(':feature_common')
     implementation project(':domain')
+    implementation project(':data')
 
     //AndroidX
     implementation 'androidx.appcompat:appcompat:1.0.2'
