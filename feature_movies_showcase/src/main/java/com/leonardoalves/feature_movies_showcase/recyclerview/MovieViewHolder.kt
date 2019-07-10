@@ -1,13 +1,15 @@
-package com.leonardoalves.testmoviedatabase.view.movieList
+package com.leonardoalves.feature_movies_showcase.recyclerview
 
 import android.view.View
 import com.bumptech.glide.Glide
-import com.leonardoalves.testmoviedatabase.R
-import com.leonardoalves.feature_common.custom.ViewHolder
+import com.leonardoalves.feature_common.custom.RecyclerViewHolder
+import com.leonardoalves.feature_movies_showcase.R
+import kotlinx.android.synthetic.main.list_item_movie.view.*
+class MovieViewHolder(itemView: View, private val listener: Listener<MovieViewModel>) : RecyclerViewHolder<MovieViewModel>(itemView) {
 
-const val MOVIE_LIST_LAYOUT_ID = R.layout.list_item_movie
-
-class MovieViewHolder(itemView: View, private val listener: Listener<MovieViewModel>) : ViewHolder<MovieViewModel>(itemView) {
+    companion object{
+        var MOVIE_LIST_LAYOUT_ID = R.layout.list_item_movie
+    }
     override fun bind(viewModel: MovieViewModel) {
         with(itemView){
             Glide.with(this)

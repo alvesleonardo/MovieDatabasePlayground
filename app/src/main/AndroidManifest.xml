@@ -12,7 +12,7 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.movieList.MovieListActivity">
+        <activity android:name="com.leonardoalves.feature_movies_showcase.movieList.MovieListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

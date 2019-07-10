@@ -1,8 +1,6 @@
 package com.leonardoalves.testmoviedatabase
 
 import com.leonardoalves.testmoviedatabase.module.presentationModule
-import com.leonardoalves.data.remoteDataSourceModule
-import com.leonardoalves.data.repositoryModule
 import org.koin.core.context.loadKoinModules
 
 object Modules {

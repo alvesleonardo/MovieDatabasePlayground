@@ -1,16 +1,17 @@
-package com.leonardoalves.testmoviedatabase.view.movieList
+package com.leonardoalves.feature_movies_showcase.movieList
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.leonardoalves.testmoviedatabase.R
 import com.leonardoalves.feature_common.custom.*
-import com.leonardoalves.testmoviedatabase.view.movieDetail.MovieDetailActivity
+import com.leonardoalves.feature_movies_showcase.R
+import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewHolder
+import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewHolder.Companion.MOVIE_LIST_LAYOUT_ID
+import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -30,13 +31,16 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
 
     private fun setupList() {
         movieAdapter = RecyclerViewAdapter(object : ViewHolderFactory {
-            override fun getType(viewModel: ViewModel): Int = when (viewModel) {
+            override fun getType(recyclerViewModel: RecyclerViewModel): Int = when (recyclerViewModel) {
                 is MovieViewModel -> MOVIE_LIST_LAYOUT_ID
                 else -> throw IllegalArgumentException()
             }
 
             override fun getHolder(viewType: Int, view: View) = when (viewType) {
-                MOVIE_LIST_LAYOUT_ID -> MovieViewHolder(view, onMovieClicked)
+                MOVIE_LIST_LAYOUT_ID -> MovieViewHolder(
+                    view,
+                    onMovieClicked
+                )
                 else -> throw IllegalArgumentException()
             }
         })
@@ -48,7 +52,7 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    if (linearLayoutManager.itemCount <= linearLayoutManager.findLastVisibleItemPosition() + 2){
+                    if (linearLayoutManager.itemCount <= linearLayoutManager.findLastVisibleItemPosition() + 2) {
                         presenter.onScrollBeyond()
                     }
                 }
@@ -59,29 +63,28 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
         }
     }
 
-    private val onMovieClicked = object : ViewHolder.Listener<MovieViewModel>{
+    private val onMovieClicked = object : RecyclerViewHolder.Listener<MovieViewModel> {
         override fun onClick(viewModel: MovieViewModel) {
-            val intent = Intent(this@MovieListActivity, MovieDetailActivity::class.java)
-            startActivity(intent)
         }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_sort_by, menu)
+        menuInflater.inflate(R.menu.sort_by, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_popular_movies -> {presenter.changeListType(MovieListPresenter.Type.POPULAR);true}
-            R.id.action_upcoming_movies -> {presenter.changeListType(MovieListPresenter.Type.UPCOMING);true}
-            R.id.action_top_rated_movies -> {presenter.changeListType(MovieListPresenter.Type.TOP_RATED);true}
+            R.id.action_popular_movies or R.id.action_upcoming_movies or R.id.action_top_rated_movies -> {
+                presenter.changeListType(item.itemId)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
     override fun setItems(itens: List<MovieViewModel>, resetList: Boolean) {
-        if (resetList){
+        if (resetList) {
             movieAdapter.setItems(itens)
         } else {
             movieAdapter.addItems(itens)
