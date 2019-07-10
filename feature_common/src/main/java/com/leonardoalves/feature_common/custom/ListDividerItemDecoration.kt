@@ -5,7 +5,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.leonardoalves.testmoviedatabase.R
+import com.leonardoalves.feature_common.R
 
 class ListDividerItemDecoration(context: Context) : androidx.recyclerview.widget.DividerItemDecoration(context, VERTICAL) {
     init {
