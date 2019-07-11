@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.movieDetail.MovieDetailActivity"
+        <activity android:name="com.leonardoalves.feature_movies_showcase.movieDetail.MovieDetailActivity"
                   android:screenOrientation="portrait" />
     </application>
 

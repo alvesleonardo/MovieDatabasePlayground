@@ -1,4 +1,4 @@
-package com.leonardoalves.services_base;
+package com.leonardoalves.data_base;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

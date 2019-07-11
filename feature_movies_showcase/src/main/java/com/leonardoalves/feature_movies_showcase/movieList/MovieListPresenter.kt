@@ -40,6 +40,7 @@ class MovieListPresenter(
                 }, {
                     it.printStackTrace()
                     completed = true
+                    view.stopLoading()
                 }, {})
         )
     }
