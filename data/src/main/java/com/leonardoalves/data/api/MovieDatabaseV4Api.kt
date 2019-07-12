@@ -29,7 +29,7 @@ interface MovieDatabaseV4Api {
     @GET("discover/movie")
     fun getTopRated(
         @Query("page") page: Int,
-        @Query("sort_by") sortBy: String = "vote_average.desc",
+        @Query("sort_by") sortBy: String = "voteAverage.desc",
         @Query("vote_count.gte") moreThanVotes: Int = 5000, //At least 5k votes to be significant
         @Query("api_key") apiKey: String = API_KEY
     ): Observable<MovieListResponse>

@@ -13,7 +13,9 @@ class MovieDetailPresenter(private val movieDetailIterator: MovieDetailIterator,
             movieDetailIterator.getMovieDetail(movieId)
                 .doOnSubscribe { view.startLoading() }
                 .doOnComplete { view.stopLoading() }
-                .subscribe({},{
+                .subscribe({
+                    view.setMovieData(it)
+                },{
                     it.printStackTrace()
                     view.stopLoading()
                 },{})

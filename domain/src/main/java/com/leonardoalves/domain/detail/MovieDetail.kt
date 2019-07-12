@@ -8,5 +8,5 @@ data class MovieDetail(
     val originalTitle: String,
     val overview: String,
     val poster: String?,
-    val vote_average: Double?
+    val voteAverage: Double?
 )

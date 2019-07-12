@@ -1,5 +1,6 @@
 package com.leonardoalves.feature_movies_showcase.movieList
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.leonardoalves.feature_common.custom.*
 import com.leonardoalves.feature_movies_showcase.R
+import com.leonardoalves.feature_movies_showcase.movieDetail.MOVIE_ID_EXTRA
+import com.leonardoalves.feature_movies_showcase.movieDetail.MovieDetailActivity
 import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewHolder
 import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewHolder.Companion.MOVIE_LIST_LAYOUT_ID
 import com.leonardoalves.feature_movies_showcase.recyclerview.MovieViewModel
@@ -65,6 +68,10 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
 
     private val onMovieClicked = object : RecyclerViewHolder.Listener<MovieViewModel> {
         override fun onClick(viewModel: MovieViewModel) {
+            val intent = Intent(this@MovieListActivity, MovieDetailActivity::class.java).apply {
+                putExtra(MOVIE_ID_EXTRA, viewModel.id)
+            }
+            startActivity(intent)
         }
     }
 
