@@ -1,5 +1,7 @@
 package com.leonardoalves.feature_movies_showcase.movieList
 
+import com.leonardoalves.data_base.IntegrationError
+import com.leonardoalves.data_base.NetworkError
 import com.leonardoalves.domain.showroom.FetchMoviesList
 import com.leonardoalves.domain.showroom.MovieShowroomIterator
 import com.leonardoalves.feature_movies_showcase.R
@@ -36,6 +38,12 @@ class MovieListPresenter(
                     isLoading = false
                     view.stopLoading()
                 }, {
+                    when (it) {
+                        NetworkError.HostUnreachable -> view.showNetworkError(R.string.error_not_connected_to_internet)
+                        NetworkError.NetworkTimeout -> view.showNetworkError(R.string.error_not_timeout)
+                        NetworkError.NetworkUnknownError -> view.showNetworkError(R.string.error_internet_unknown_error)
+                        IntegrationError.RequestError, IntegrationError.ServerError, IntegrationError.UnexpectedResponse -> view.showGenericError(it.toString())
+                    }
                     it.printStackTrace()
                     completed = true
                     view.stopLoading()
@@ -70,6 +78,10 @@ class MovieListPresenter(
 
     fun onRefresh() {
         refreshList()
+    }
+
+    fun tryAgain() {
+        getItems()
     }
 
     fun onDestroy() {

@@ -6,5 +6,7 @@ interface MovieListView {
     fun setItems(itens: List<MovieViewModel>, resetList: Boolean = false)
     fun startLoading()
     fun stopLoading()
+    fun showNetworkError(message: Int)
+    fun showGenericError(message: String)
 
 }

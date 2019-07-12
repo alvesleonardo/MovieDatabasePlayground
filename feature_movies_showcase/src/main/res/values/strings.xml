@@ -4,4 +4,8 @@
     <string name="action_upcoming_movies">Upcoming</string>
     <string name="action_top_rated_movies">Top Rated</string>
     <string name="title_feature_movie_list">Movie List</string>
+    <string name="error_not_connected_to_internet">Can\'t connect to internet</string>
+    <string name="error_not_timeout">Connection Timeout</string>
+    <string name="error_internet_unknown_error">An unknown error on the connection happened.</string>
+    <string name="try_again">Try again</string>
 </resources>

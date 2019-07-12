@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.leonardoalves.feature_common.custom.*
 import com.leonardoalves.feature_movies_showcase.R
 import com.leonardoalves.feature_movies_showcase.movieDetail.MOVIE_ID_EXTRA
@@ -109,5 +110,15 @@ class MovieListActivity : AppCompatActivity(), MovieListView {
     override fun onDestroy() {
         presenter.onDestroy()
         super.onDestroy()
+    }
+
+    override fun showNetworkError(message: Int) {
+        Snackbar.make(rvMovieList, getString(message), Snackbar.LENGTH_LONG).apply {
+            setAction(R.string.try_again){ presenter.tryAgain()}
+        }.show()
+    }
+
+    override fun showGenericError(message: String) {
+        Snackbar.make(rvMovieList, message, Snackbar.LENGTH_LONG).show()
     }
 }
