@@ -47,7 +47,7 @@ data class MovieListResponse(
 	val name: String? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Long,
 
 	@field:SerializedName("page")
 	val page: Int? = null,

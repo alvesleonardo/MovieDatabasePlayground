@@ -1,4 +1,4 @@
-package com.leonardoalves.data
+package com.leonardoalves.data.movieShowroom
 
 import com.leonardoalves.data.api.MovieDatabaseV4Api
 import com.leonardoalves.data.utils.ExecutionErrorHandler

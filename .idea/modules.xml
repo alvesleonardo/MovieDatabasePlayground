@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
       <module fileurl="file://$PROJECT_DIR$/data_base/data_base.iml" filepath="$PROJECT_DIR$/data_base/data_base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data_cache/data_cache.iml" filepath="$PROJECT_DIR$/data_cache/data_cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/feature_common/feature_common.iml" filepath="$PROJECT_DIR$/feature_common/feature_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/feature_movies_showcase/feature_movies_showcase.iml" filepath="$PROJECT_DIR$/feature_movies_showcase/feature_movies_showcase.iml" />
