@@ -12,7 +12,7 @@ import io.reactivex.Observable
 interface MovieDao {
 
     @Query ("SELECT * FROM Movies WHERE uid = :uid")
-    fun get(uid: Long): Observable<MovieCache>
+    fun get(uid: Long): Observable<List<MovieCache>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(movieCache: MovieCache) : Completable

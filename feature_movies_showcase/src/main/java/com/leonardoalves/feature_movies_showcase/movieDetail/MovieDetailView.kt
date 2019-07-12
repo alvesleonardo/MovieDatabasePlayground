@@ -6,4 +6,5 @@ interface MovieDetailView {
     fun startLoading()
     fun stopLoading()
     fun setMovieData(movieDetail: MovieDetail)
+    fun showCriticalError(messageId: Int)
 }

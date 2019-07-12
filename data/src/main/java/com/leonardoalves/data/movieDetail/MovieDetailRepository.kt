@@ -5,6 +5,7 @@ import com.leonardoalves.data.utils.NetworkCheck
 import com.leonardoalves.data.utils.onDefaultSchedulers
 import com.leonardoalves.data_base.MovieDetailMapper
 import com.leonardoalves.data_base.MovieDetailService
+import com.leonardoalves.data_cache.MovieCache
 import com.leonardoalves.data_cache.MovieCacheMapper
 import com.leonardoalves.data_cache.MovieDao
 import com.leonardoalves.domain.detail.FetchMovieDetail
@@ -28,6 +29,7 @@ class MovieDetailRepository(
                 }.map { MovieDetailMapper(it) }
         } else {
             movieDao.get(id)
+                .map { it.first() }
                 .map { MovieCacheMapper.cacheToMovieDetail(it) }
                 .onDefaultSchedulers()
         }

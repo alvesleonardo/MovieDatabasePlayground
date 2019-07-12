@@ -8,4 +8,6 @@
     <string name="error_not_timeout">Connection Timeout</string>
     <string name="error_internet_unknown_error">An unknown error on the connection happened.</string>
     <string name="try_again">Try again</string>
+    <string name="error_movie_load_error">Can\'t load movie data</string>
+    <string name="error_movie_invalid">Invalid movie</string>
 </resources>
