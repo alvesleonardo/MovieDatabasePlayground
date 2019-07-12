@@ -9,16 +9,6 @@ import com.leonardoalves.domain.showroom.MovieShowRoom
 
 object MovieCacheMapper {
 
-    fun cacheToMovieShowroom(cache: MovieCache) = with(cache) {
-        MovieShowRoom(
-            id = uid,
-            poster = poster ?: PLACEHOLDER_URL,
-            localizedTitle = title,
-            originalTitle = originalTitle,
-            overview = overview
-        )
-    }
-
     fun cacheToMovieDetail(cache: MovieCache) = with(cache){
         MovieDetail(
             id = uid,
@@ -45,9 +35,9 @@ object MovieCacheMapper {
         )
     }
 
-    fun responseToCache(response: MovieListResponse) = with(response){
+    fun responseToCacheTopRated(response: MovieListResponse, page: Int) = with(response){
         this.results.orEmpty().map {
-            MovieCache(
+            MovieCacheTopRated(
                 uid = it.id,
                 adult = it.adult ?: false,
                 title = it.title ?: "",
@@ -55,8 +45,72 @@ object MovieCacheMapper {
                 overview = it.overview ?: "",
                 poster = if (!it.posterPath.isNullOrBlank()) IMAGE_URL + it.posterPath else null,
                 voteAverage = it.voteAverage,
-                homepage = null
+                homepage = null,
+                position = this.results.orEmpty().indexOf(it) * page
             )
         }
+    }
+
+
+    fun responseToCachePopular(response: MovieListResponse, page: Int) = with(response){
+        this.results.orEmpty().map {
+            MovieCachePopular(
+                uid = it.id,
+                adult = it.adult ?: false,
+                title = it.title ?: "",
+                originalTitle = it.originalTitle ?: "",
+                overview = it.overview ?: "",
+                poster = if (!it.posterPath.isNullOrBlank()) IMAGE_URL + it.posterPath else null,
+                voteAverage = it.voteAverage,
+                homepage = null,
+                position = this.results.orEmpty().indexOf(it) * page
+            )
+        }
+    }
+
+    fun responseToCacheUpcoming(response: MovieListResponse, page: Int) = with(response){
+        this.results.orEmpty().map {
+            MovieCacheUpcoming(
+                uid = it.id,
+                adult = it.adult ?: false,
+                title = it.title ?: "",
+                originalTitle = it.originalTitle ?: "",
+                overview = it.overview ?: "",
+                poster = if (!it.posterPath.isNullOrBlank()) IMAGE_URL + it.posterPath else null,
+                voteAverage = it.voteAverage,
+                homepage = null,
+                position = this.results.orEmpty().indexOf(it) * page
+            )
+        }
+    }
+
+    fun cacheToMovieShowroom(cache: MovieCacheUpcoming) = with(cache){
+        MovieShowRoom(
+            id = uid,
+            poster = poster ?: PLACEHOLDER_URL,
+            localizedTitle = title,
+            originalTitle = originalTitle,
+            overview = overview
+        )
+    }
+
+    fun cacheToMovieShowroom(cache: MovieCachePopular) = with(cache){
+        MovieShowRoom(
+            id = uid,
+            poster = poster ?: PLACEHOLDER_URL,
+            localizedTitle = title,
+            originalTitle = originalTitle,
+            overview = overview
+        )
+    }
+
+    fun cacheToMovieShowroom(cache: MovieCacheTopRated) = with(cache){
+        MovieShowRoom(
+            id = uid,
+            poster = poster ?: PLACEHOLDER_URL,
+            localizedTitle = title,
+            originalTitle = originalTitle,
+            overview = overview
+        )
     }
 }

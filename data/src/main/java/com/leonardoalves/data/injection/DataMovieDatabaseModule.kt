@@ -32,7 +32,7 @@ private val dataMovieDatabaseModule = module {
 }
 
 private val repositoriesModule = module {
-    single<FetchMoviesList> { MovieShowroomRepository(get(), get()) }
+    single<FetchMoviesList> { MovieShowroomRepository(get(), get(), get()) }
     single<FetchMovieDetail> { MovieDetailRepository(get(), get(), get()) }
 }
 val dataModule = listOf(networkModule, dataMovieDatabaseModule, repositoriesModule, cacheModule)

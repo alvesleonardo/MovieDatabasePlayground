@@ -8,4 +8,5 @@ import org.koin.dsl.module
 val cacheModule = module {
     single { Room.databaseBuilder(get(), CacheDatabase::class.java, "database-cache-movie").build() }
     single { get<CacheDatabase>().movieDao() }
+    single { get<CacheDatabase>().movieShowroomDao() }
 }

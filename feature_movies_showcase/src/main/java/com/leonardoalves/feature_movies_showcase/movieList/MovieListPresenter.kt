@@ -29,14 +29,12 @@ class MovieListPresenter(
                     isLoading = true
                     view.startLoading()
                 }
-                .doOnComplete {
-                    isLoading = false
-                    view.stopLoading()
-                }
                 .map { movies -> movies.map { MovieViewModel(it) } }
                 .subscribe({
                     view.setItems(it, page == 1)
                     page++
+                    isLoading = false
+                    view.stopLoading()
                 }, {
                     it.printStackTrace()
                     completed = true
