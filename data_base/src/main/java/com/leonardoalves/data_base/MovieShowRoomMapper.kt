@@ -16,7 +16,7 @@ object MovieShowRoomMapper {
                 IMAGE_URL + it.posterPath
             }
             MovieShowRoom(
-                id = id,
+                id = it.id,
                 poster = imageUrl,
                 localizedTitle = it.title ?: "",
                 originalTitle = it.originalTitle ?: "",
