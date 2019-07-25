@@ -1,0 +1,63 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-28-alpha
+    environment:
+      CC_TEST_REPORTER_ID: e445d0175152cd2b0d4405322ecbbdf81e0898e014e380430982a3d50ede36e8
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      #      - run:
+      #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+      #         command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Licenses
+          command: yes | sdkmanager --licenses && yes | sdkmanager --update || exit 0
+      - run:
+          name: Setup emulator
+          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo no | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+      - run:
+          name: Launch emulator
+          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -no-boot-anim -no-window -accel on -gpu off
+          background: true
+      - run:
+          name: Wait emulator
+          command: |
+              circle-android wait-for-boot
+              sleep 30
+              adb shell input keyevent 82
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            # download test reporter as a static binary
+                     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+                     chmod +x ./cc-test-reporter
+      - run:
+          name: Run Tests
+          command: |
+            ./cc-test-reporter before-build
+            ./gradlew clean jacocoTestReport
+            ls ~/code/app/build/
+            ls ~/code/app/build/reports/
+            ls ~/code/app/build/reports/jacoco/
+            ls ~/code/app/build/reports/jacoco/jacocoTestReport
+            JACOCO_SOURCE_PATH=~/code/app/src/main/java ./cc-test-reporter format-coverage -d -t jacoco ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+            ./cc-test-reporter upload-coverage -d
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+        #           ./cc-test-reporter format-coverage -d -t jacoco ./app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
