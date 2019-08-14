@@ -6,6 +6,7 @@ jobs:
       - image: circleci/android:api-28-alpha
     environment:
       CC_TEST_REPORTER_ID: e445d0175152cd2b0d4405322ecbbdf81e0898e014e380430982a3d50ede36e8
+      JACOCO_SOURCE_PATH: ~/code/app/src/main/java/
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
@@ -48,11 +49,8 @@ jobs:
           command: |
             ./cc-test-reporter before-build
             ./gradlew clean jacocoTestReport
-            ls ~/code/app/build/
-            ls ~/code/app/build/reports/
-            ls ~/code/app/build/reports/jacoco/
-            ls ~/code/app/build/reports/jacoco/jacocoTestReport
-            JACOCO_SOURCE_PATH=~/code/app/src/main/java ./cc-test-reporter format-coverage -d -t jacoco ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+            cat ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+            ./cc-test-reporter format-coverage ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml -d -t jacoco
             ./cc-test-reporter upload-coverage -d
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
@@ -61,3 +59,4 @@ jobs:
           path: app/build/test-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
         #           ./cc-test-reporter format-coverage -d -t jacoco ./app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
+        #./cc-test-reporter format-coverage -d -t jacoco ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
