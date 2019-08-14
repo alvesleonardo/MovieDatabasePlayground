@@ -3,7 +3,8 @@ jobs:
   build:
     working_directory:  /home/circleci/code
     docker:
-      - image: circleci/android:api-28-alpha
+      - image: circleci/android:api-27
+    parallelism: 2
     environment:
       CC_TEST_REPORTER_ID: e445d0175152cd2b0d4405322ecbbdf81e0898e014e380430982a3d50ede36e8
       JACOCO_SOURCE_PATH: /home/circleci/code/app/src/main/java/
@@ -48,10 +49,8 @@ jobs:
           name: Run Tests
           command: |
             ./cc-test-reporter before-build
-            ./gradlew clean createDebugCoverageReport
-            ls ~/code/app/src/main/java/com/leonardoalves/testmoviedatabase/Modules.kt
-            ls /home/circleci/code/app/src/main/java/com/
-            JACOCO_SOURCE_PATH=/home/circleci/code/app/src/main/java/ ./cc-test-reporter format-coverage ~/code/app/build/reports/coverage/debug/report.xml -d -t jacoco
+            ./gradlew clean jacocoTestReport
+            JACOCO_SOURCE_PATH=/home/circleci/code/app/src/main/java/ ./cc-test-reporter format-coverage ~/code/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml -d -t jacoco
             ./cc-test-reporter upload-coverage -d
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
