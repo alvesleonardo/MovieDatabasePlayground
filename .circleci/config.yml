@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory:  /home/circleci/code
     docker:
-      - image: circleci/android:api-27
+      - image: circleci/android:api-28
     parallelism: 2
     environment:
       CC_TEST_REPORTER_ID: e445d0175152cd2b0d4405322ecbbdf81e0898e014e380430982a3d50ede36e8
@@ -28,11 +28,14 @@ jobs:
           command: yes | sdkmanager --licenses && yes | sdkmanager --update || exit 0
       - run:
           name: Setup emulator
-          command: sdkmanager "system-images;android-22;default;armeabi-v7a" && echo no | avdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo no | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
       - run:
           name: Launch emulator
-          command: export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib && emulator64-arm -avd test -no-boot-anim -no-window -accel on -gpu off
+          command: |
+            export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+            ${ANDROID_HOME}/emulator/emulator -avd test -no-window -noaudio -no-boot-anim -accel auto
           background: true
+          parallel: true
       - run:
           name: Wait emulator
           command: |
